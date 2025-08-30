@@ -1,5 +1,5 @@
-import Navbar from "./components/Shared/Navbar"
-import { Button } from "./components/ui/button"
+import { Outlet } from "react-router"
+import CommonLayout from "./components/Layouts/CommonLayout"
 
 
 function App() {
@@ -7,11 +7,9 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      <h1>hello Digital wallets</h1>
-      <Button>
-        welcome
-      </Button>
+      <CommonLayout>
+        <Outlet />
+      </CommonLayout>
     </>
   )
 }
