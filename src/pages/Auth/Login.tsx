@@ -4,7 +4,7 @@ export default function Login() {
     return (
         <div className='grid md:grid-cols-2 min-h-screen'>
             <div className='md:block md:col-span-1 hidden  '>
-              
+
                 <img src={image} alt="" className='' />
 
             </div>
