@@ -27,6 +27,7 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 
 
 const registerSchema = z.object({
@@ -42,13 +43,19 @@ const registerSchema = z.object({
 })
 
 export default function RegisterForm() {
+    const [createUser] = useRegisterMutation()
 
     const form = useForm<z.infer<typeof registerSchema>>({
         resolver: zodResolver(registerSchema)
     })
 
-    const onSubmit = (data: z.infer<typeof registerSchema>) => {
-        console.log(data);
+    const onSubmit = async (data: z.infer<typeof registerSchema>) => {
+        try {
+            const res = await createUser(data)
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
     }
     return (
         <div className="mx-auto w-full max-w-md">
