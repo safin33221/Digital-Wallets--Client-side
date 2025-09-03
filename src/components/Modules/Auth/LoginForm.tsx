@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import {
     Form,
     FormControl,
@@ -23,12 +23,14 @@ import {
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
+
 const loginSchema = z.object({
     phoneNumber: z.string(),
     password: z.string()
 })
 export default function LoginForm() {
     const [login] = useLoginMutation()
+    const navigate = useNavigate()
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema)
     })
@@ -36,6 +38,9 @@ export default function LoginForm() {
         try {
             const res = await login(data)
             console.log(res);
+            if (res.data.success) {
+                navigate('/')
+            }
         } catch (error) {
             console.log(error);
         }

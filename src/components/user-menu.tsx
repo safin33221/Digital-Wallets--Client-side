@@ -22,8 +22,26 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useGetMeQuery } from "@/redux/features/user/user.api"
+import { authApi, useLogoutMutation } from "@/redux/features/auth/auth.api"
+import { useAppDispatch } from "@/redux/hook"
+import { toast } from "sonner"
 
 export default function UserMenu() {
+  const { data } = useGetMeQuery(undefined)
+  const [logout] = useLogoutMutation()
+  const dispatch = useAppDispatch()
+  const handleLogout = async () => {
+    try {
+      const res = await logout(undefined)
+
+      console.log(res);
+      dispatch(authApi.util.resetApiState())
+      toast.success("Logout Successful")
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -36,11 +54,14 @@ export default function UserMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-64" align="end">
         <DropdownMenuLabel className="flex min-w-0 flex-col">
-          <span className="text-foreground truncate text-sm font-medium">
-            Keith Kennedy
+          <span className="text-muted-foreground truncate text-sm font-medium">
+            {data?.data?.name}
           </span>
           <span className="text-muted-foreground truncate text-xs font-normal">
-            k.kennedy@originui.com
+            {data?.data?.phoneNumber}
+          </span>
+          <span className="text-muted-foreground truncate text-xs font-normal">
+            {data?.data?.email}
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -72,7 +93,10 @@ export default function UserMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
-          <span>Logout</span>
+          <Button onClick={handleLogout}>
+
+            <span>Logout</span>
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

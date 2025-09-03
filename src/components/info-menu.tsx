@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export default function InfoMenu() {
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

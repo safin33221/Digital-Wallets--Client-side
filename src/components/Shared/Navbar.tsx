@@ -112,12 +112,26 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <ModeToggle />
             {/* Info menu */}
-            <InfoMenu />
+
+
+            <InfoMenu /> 
+
+
             {/* Notification */}
             <NotificationMenu />
           </div>
           {/* User menu */}
-          <UserMenu />
+
+          {
+            data?.data?.phoneNumber ?
+
+              <UserMenu /> : (
+                <Link to={`/login`}>
+                  <Button>Login</Button>
+                </Link>
+              )
+          }
+
         </div>
       </div>
     </header>
