@@ -5,6 +5,7 @@ import Register from "@/pages/Auth/Register";
 import Contact from "@/pages/Contact";
 import FAQ from "@/pages/FAQ";
 import Features from "@/pages/Features";
+import Home from "@/pages/Home";
 import { createBrowserRouter } from "react-router";
 
 export const router = createBrowserRouter([
@@ -12,6 +13,10 @@ export const router = createBrowserRouter([
         Component: App,
         path: "/",
         children: [
+            {
+                Component: Home,
+                index: true
+            },
             {
                 Component: About,
                 path: "about"
