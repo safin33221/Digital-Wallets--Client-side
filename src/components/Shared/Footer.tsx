@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <div>
             <footer className="">
-                <div className="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-24">
+                <div className="relative mx-auto  px-4 py-16 sm:px-6 lg:px-8 lg:pt-24">
                     <div className="absolute end-4 top-4 sm:end-6 sm:top-6 lg:end-8 lg:top-8">
                         <a
                             className="inline-block rounded-full  p-2 bg-primary  shadow-sm transition hover:bg-secondary sm:p-3 lg:p-4"

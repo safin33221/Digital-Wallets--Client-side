@@ -31,7 +31,7 @@ export default function Navbar() {
   const { data } = useGetMeQuery(undefined)
   console.log(data);
   return (
-    <header className="border-b px-4 md:px-6">
+    <header className="border-b px-4 md:px-6 ">
       <div className="flex h-20 my-2 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
@@ -76,7 +76,7 @@ export default function Navbar() {
                   {navigationLinks.map((link, index) => (
                     <NavigationMenuItem key={index} className="w-full">
                       <Link to={link.href}>
-                        <NavigationMenuLink href={link.href} className="py-1.5">
+                        <NavigationMenuLink href={link.href} className="py-1.5 text-xl">
                           {link.label}
                         </NavigationMenuLink>
                       </Link>
@@ -88,16 +88,16 @@ export default function Navbar() {
           </Popover>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a href="#" className="text-primary hover:text-primary/90">
+            <Link to="/" className="text-primary hover:text-primary/90">
               <Logo />
-            </a>
+            </Link>
             {/* Navigation menu */}
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">
                 {navigationLinks.map((link, index) => (
                   <NavigationMenuItem key={index}>
                     <Link to={link.href}>
-                      <NavigationMenuLink href={link.href} className="text-muted-foreground hover:text-primary py-1.5 font-medium">
+                      <NavigationMenuLink href={link.href} className="text-muted-foreground text-xl hover:text-primary py-1.5 font-medium">
                         {link.label}
                       </NavigationMenuLink>
                     </Link>

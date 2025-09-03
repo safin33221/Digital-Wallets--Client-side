@@ -4,9 +4,9 @@ import Footer from "../Shared/Footer";
 
 export default function CommonLayout({ children }: { children: ReactNode }) {
     return (
-        <div className="min-h-screen flex flex-col max-w-7xl mx-auto">
+        <div className="min-h-screen flex flex-col max-w-[1420px] mx-auto">
             <Navbar />
-            <div className="grow-1">
+            <div className="grow-1 mx-auto  ">
                 {
                     children
                 }
