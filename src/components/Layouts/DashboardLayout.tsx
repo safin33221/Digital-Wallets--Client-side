@@ -6,6 +6,7 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Outlet } from "react-router";
+import { ModeToggle } from "../mood-toggle";
 export default function DashboardLayout() {
     return (
         <SidebarProvider>
@@ -17,6 +18,7 @@ export default function DashboardLayout() {
                         orientation="vertical"
                         className="mr-2 data-[orientation=vertical]:h-4"
                     />
+                    <ModeToggle/>
                     {/* <Breadcrumb>
                         <BreadcrumbList>
                             <BreadcrumbItem className="hidden md:block">
