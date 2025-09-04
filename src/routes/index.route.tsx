@@ -1,4 +1,5 @@
 import App from "@/App";
+import DashboardLayout from "@/components/Layouts/DashboardLayout";
 import About from "@/pages/About";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
                 path: "fqa"
             },
         ]
+    },
+
+    {
+        Component: DashboardLayout,
+        path: "/dashboard"
     },
     {
         Component: Login,

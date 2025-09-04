@@ -1,10 +1,7 @@
 import {
-  BoltIcon,
-  BookOpenIcon,
-  Layers2Icon,
-  LogOutIcon,
+  BoltIcon, LogOutIcon,
   PinIcon,
-  UserPenIcon,
+  UserPenIcon
 } from "lucide-react"
 
 import {
@@ -26,6 +23,7 @@ import { useGetMeQuery } from "@/redux/features/user/user.api"
 import { authApi, useLogoutMutation } from "@/redux/features/auth/auth.api"
 import { useAppDispatch } from "@/redux/hook"
 import { toast } from "sonner"
+import { Link } from "react-router"
 
 export default function UserMenu() {
   const { data } = useGetMeQuery(undefined)
@@ -68,16 +66,9 @@ export default function UserMenu() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <BoltIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 1</span>
+            <Link to={'dashboard'}>Dashboard</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Layers2Icon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 2</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <BookOpenIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>Option 3</span>
-          </DropdownMenuItem>
+  
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
