@@ -1,5 +1,6 @@
 import { role } from "@/constants/Role";
 import { useGetAllUsersQuery } from "@/redux/features/user/user.api";
+import type { IUser } from "@/types/user.type";
 
 export default function ManageAgents() {
   const { data: users } = useGetAllUsersQuery({ role: role.agent })

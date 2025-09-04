@@ -5,7 +5,7 @@ import type { ISidebarItem } from "@/types/index.type";
 
 export const UserSidebar: ISidebarItem[] = [
     {
-        title: "Getting Started",
+        title: "",
         items: [
             {
                 title: "Overview",

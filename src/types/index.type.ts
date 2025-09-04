@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import type { ComponentType } from "react";
 
 export interface ISidebarItem {
@@ -6,7 +7,8 @@ export interface ISidebarItem {
     items: {
         title: string,
         url: string,
-        component: ComponentType
+        component: ComponentType,
+        icon?: LucideIcon
     }[]
 }
 export type TRole = "ADMIN" | "USER" | "AGENT"

@@ -15,6 +15,8 @@ import {
 import { useGetMeQuery } from "@/redux/features/user/user.api"
 import getSidebarItem from "@/utils/getSidebarItem"
 import { Link } from "react-router"
+import Logo from "./logo"
+import { Globe } from "lucide-react"
 
 // This is sample data.
 
@@ -27,7 +29,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
+      <SidebarHeader className="flex items-center border-b">
+        <Logo />
         {/* <VersionSwitcher
           versions={data.versions}
           defaultVersion={data.versions[0]}
@@ -40,15 +43,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
-              <SidebarMenu>
+              <SidebarMenu className="space-y-2">
                 {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild >
+                  <SidebarMenuItem className="flex items-center gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-1 rounded-xl" key={item.title}>
+                    {item.icon && <item.icon className="w-6" />}
+                    <SidebarMenuButton className="text-lg hover:bg-primary/10  font-semibold" asChild >
                       <Link to={item.url}>{item.title}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
+
+                <SidebarMenuButton className="gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-2 rounded-xl" asChild >
+                  <Link to={`/`}> <Globe/> View Site</Link>
+                </SidebarMenuButton>
               </SidebarMenu>
+
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
