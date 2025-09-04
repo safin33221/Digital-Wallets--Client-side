@@ -24,9 +24,18 @@ import { authApi, useLogoutMutation } from "@/redux/features/auth/auth.api"
 import { useAppDispatch } from "@/redux/hook"
 import { toast } from "sonner"
 import { Link } from "react-router"
+import { role } from "@/constants/Role"
+
+
+const dashboardLink = [
+  { href: "/admin", label: "Dashboard", role: role.admin },
+  { href: "/agent", label: "Dashboard", role: role.agent },
+  { href: "/user", label: "Dashboard", role: role.user },
+
+]
 
 export default function UserMenu() {
-  const { data } = useGetMeQuery(undefined)
+  const { data, isLoading } = useGetMeQuery(undefined)
   const [logout] = useLogoutMutation()
   const dispatch = useAppDispatch()
   const handleLogout = async () => {
@@ -46,7 +55,7 @@ export default function UserMenu() {
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
           <Avatar>
             <AvatarImage src="./avatar.jpg" alt="Profile image" />
-            <AvatarFallback>KK</AvatarFallback>
+            <AvatarFallback>{data?.data?.name.split("")[0]}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -64,11 +73,27 @@ export default function UserMenu() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+
+          {
+            !isLoading && dashboardLink?.map((link) => (
+              <>
+                {
+                  link?.role === data?.data?.role && (
+                    < DropdownMenuItem >
+                      <BoltIcon size={16} className="opacity-60" aria-hidden="true" />
+                      <Link to={link.href}>{link.label}</Link>
+                    </DropdownMenuItem>
+                  )
+                }
+              </>
+            ))
+          }
+          {/* < DropdownMenuItem >
             <BoltIcon size={16} className="opacity-60" aria-hidden="true" />
-            <Link to={'dashboard'}>Dashboard</Link>
-          </DropdownMenuItem>
-  
+            <Link to={''}>lihki</Link>
+          </DropdownMenuItem> */}
+
+
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -82,14 +107,14 @@ export default function UserMenu() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>
           <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
-          <Button onClick={handleLogout}>
 
-            <span>Logout</span>
-          </Button>
+
+          <span>Logout</span>
+
         </DropdownMenuItem>
       </DropdownMenuContent>
-    </DropdownMenu>
+    </DropdownMenu >
   )
 }

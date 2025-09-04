@@ -51,8 +51,8 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Navigate to={`/admin/overview`} />,
-                ...generateRoute(adminSidebar)
-            }
+            },
+            ...generateRoute(adminSidebar)
         ]
     },
     {
@@ -62,8 +62,8 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Navigate to={`/agent/overview`} />,
-                ...generateRoute(agentSidebar)
-            }
+            },
+            ...generateRoute(agentSidebar)
         ]
     },
     {
@@ -73,8 +73,8 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Navigate to={`/user/overview`} />,
-                ...generateRoute(UserSidebar)
-            }
+            },
+            ...generateRoute(UserSidebar)
         ]
     },
     {

@@ -9,17 +9,17 @@ export const UserSidebar: ISidebarItem[] = [
         items: [
             {
                 title: "Overview",
-                url: "/admin/overview",
+                url: "/user/overview",
                 component: Overview
             },
             {
                 title: "Manage User",
-                url: "/admin/mange-user",
+                url: "/user/mange-user",
                 component: ManageUser
             },
             {
                 title: "Manage Agents",
-                url: "/admin/mange-agents",
+                url: "/user/mange-agents",
                 component: ManageAgents
             },
 
