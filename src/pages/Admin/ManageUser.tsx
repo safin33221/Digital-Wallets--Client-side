@@ -5,14 +5,14 @@ import type { IUser } from "@/types/user.type";
 
 export default function ManageUser() {
   const { data: users } = useGetAllUsersQuery({ role: role.user })
-  console.log(users);
+
   return (
     <div className="p-6 space-y-6">
       {/* Header Controls */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <h1 className="text-2xl font-bold">👥 User Management</h1>
 
-        <div className="flex flex-wrap items-center gap-3">
+        {/* <div className="flex flex-wrap items-center gap-3">
           <input
             type="text"
             placeholder="🔍 Search by name, email or phone"
@@ -34,7 +34,7 @@ export default function ManageUser() {
             <option value="agent">Agents</option>
             <option value="user">Users</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
       {/* User Table */}
