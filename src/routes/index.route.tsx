@@ -1,5 +1,6 @@
 import App from "@/App";
 import DashboardLayout from "@/components/Layouts/DashboardLayout";
+import { role } from "@/constants/Role";
 import About from "@/pages/About";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
@@ -7,7 +8,13 @@ import Contact from "@/pages/Contact";
 import FAQ from "@/pages/FAQ";
 import Features from "@/pages/Features";
 import Home from "@/pages/Home";
-import { createBrowserRouter } from "react-router";
+import type { TRole } from "@/types/index.type";
+import { generateRoute } from "@/utils/generateRoute";
+import { withAuth } from "@/utils/withAuth";
+import { createBrowserRouter, Navigate } from "react-router";
+import { adminSidebar } from "./AdminSidebar";
+import { agentSidebar } from "./AgentSidebarItem";
+import { UserSidebar } from "./UserSidebarItem";
 
 export const router = createBrowserRouter([
     {
@@ -38,8 +45,37 @@ export const router = createBrowserRouter([
     },
 
     {
-        Component: DashboardLayout,
-        path: "/dashboard"
+        Component: withAuth(DashboardLayout, role.admin as TRole),
+        path: "/admin",
+        children: [
+            {
+                index: true,
+                element: <Navigate to={`/admin/overview`} />,
+                ...generateRoute(adminSidebar)
+            }
+        ]
+    },
+    {
+        Component: withAuth(DashboardLayout, role.agent as TRole),
+        path: "/agent",
+        children: [
+            {
+                index: true,
+                element: <Navigate to={`/agent/overview`} />,
+                ...generateRoute(agentSidebar)
+            }
+        ]
+    },
+    {
+        Component: withAuth(DashboardLayout, role.user as TRole),
+        path: "/user",
+        children: [
+            {
+                index: true,
+                element: <Navigate to={`/user/overview`} />,
+                ...generateRoute(UserSidebar)
+            }
+        ]
     },
     {
         Component: Login,
