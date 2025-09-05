@@ -1,4 +1,5 @@
-import OverviewSkeleton from "@/components/Skeleton/OverviewSkeleton";
+
+import OverviewSkeleton from "@/components/ui/Skeleton/OverviewSkeleton";
 import { useGetUserStatQuery } from "@/redux/features/stat/stat.api";
 import { Ban, ShieldCheck, UserCheck, UserCog, UserX } from "lucide-react";
 

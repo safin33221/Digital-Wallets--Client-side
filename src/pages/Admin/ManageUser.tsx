@@ -1,40 +1,15 @@
-
 import { role } from "@/constants/Role";
 import { useGetAllUsersQuery } from "@/redux/features/user/user.api";
 import type { IUser } from "@/types/user.type";
 
 export default function ManageUser() {
-  const { data: users } = useGetAllUsersQuery({ role: role.user })
+  const { data: users, isLoading } = useGetAllUsersQuery({ role: role.user });
 
   return (
     <div className="p-6 space-y-6">
       {/* Header Controls */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <h1 className="text-2xl font-bold">👥 User Management</h1>
-
-        {/* <div className="flex flex-wrap items-center gap-3">
-          <input
-            type="text"
-            placeholder="🔍 Search by name, email or phone"
-            // value={search}
-            // onChange={(e) => setSearch(e.target.value)}
-            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-          />
-
-          <select
-            // value={filter}
-            // onChange={(e) => setFilter(e.target.value)}
-            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-          >
-            <option value="all">All Users</option>
-            <option value="verified">Verified</option>
-            <option value="non-verified">Non-Verified</option>
-            <option value="blocked">Blocked</option>
-            <option value="unblocked">Unblocked</option>
-            <option value="agent">Agents</option>
-            <option value="user">Users</option>
-          </select>
-        </div> */}
       </div>
 
       {/* User Table */}
@@ -52,8 +27,18 @@ export default function ManageUser() {
             </tr>
           </thead>
           <tbody>
-            {
-              users?.data?.map((user: IUser) => (
+            {isLoading
+              ? // Skeleton rows
+              Array.from({ length: 5 }).map((_, i) => (
+                <tr key={i} className="animate-pulse border-b">
+                  {Array.from({ length: 7 }).map((_, j) => (
+                    <td key={j} className="p-3">
+                      <div className="h-4 w-24 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                    </td>
+                  ))}
+                </tr>
+              ))
+              : users?.data?.map((user: IUser) => (
                 <tr
                   key={user._id}
                   className="border-b hover:bg-gray-50 dark:hover:bg-gray-700"
@@ -64,9 +49,13 @@ export default function ManageUser() {
                   <td className="p-3">{user.role}</td>
                   <td className="p-3">
                     {user.isVerified ? (
-                      <span className="text-green-600 font-medium">✔ Verified</span>
+                      <span className="text-green-600 font-medium">
+                        ✔ Verified
+                      </span>
                     ) : (
-                      <span className="text-red-600 font-medium">❌ Not Verified</span>
+                      <span className="text-red-600 font-medium">
+                        ❌ Not Verified
+                      </span>
                     )}
                   </td>
                   <td className="p-3">
@@ -95,10 +84,12 @@ export default function ManageUser() {
               ))}
           </tbody>
         </table>
-        {users?.length === 0 && (
+
+        {/* Empty State */}
+        {!isLoading && users?.data?.length === 0 && (
           <p className="text-center py-4 text-gray-500">No users found</p>
         )}
       </div>
     </div>
   );
-};
+}
