@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { EditAdminProfileModal } from "@/components/Modules/Admin/EditAdminProfileModal";
 import { useGetMeQuery } from "@/redux/features/user/user.api";
-import { CreditCard, User, CheckCircle, XCircle } from "lucide-react";
+import { User, CheckCircle, XCircle } from "lucide-react";
 export default function AdminProfile() {
     const { data: user, isLoading } = useGetMeQuery(undefined)
     if (isLoading) return
@@ -14,10 +14,8 @@ export default function AdminProfile() {
                     <p className="text-gray-500">Role: {data.role}</p>
                 </div>
                 <div className="flex gap-3">
-                    <Button >
-                        Edit Profile
-                    </Button>
-                  
+                    <EditAdminProfileModal />
+
                 </div>
             </header>
 

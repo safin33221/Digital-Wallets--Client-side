@@ -6,7 +6,8 @@ const userApi = baseApi.injectEndpoints({
             query: () => ({
                 url: "/user/me",
                 method: "GET"
-            })
+            }),
+            providesTags: ["USER"]
         }),
         getAllUsers: builder.query({
             query: (params) => ({
@@ -14,12 +15,21 @@ const userApi = baseApi.injectEndpoints({
                 method: "GET",
                 params: params
             })
-        })
+        }),
+        updateUser: builder.mutation({
+            query: ({ updateData, id }) => ({
+                url: `/user/${id}`,
+                method: "PATCH",
+                data: updateData
+            }),
+            invalidatesTags: ["USER"]
+        }),
     })
 })
 
 export const {
     useGetMeQuery,
-    useGetAllUsersQuery
+    useGetAllUsersQuery,
+    useUpdateUserMutation
 
 } = userApi
