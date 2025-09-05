@@ -31,6 +31,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar {...props}>
       <SidebarHeader className="flex items-center border-b">
         <Logo />
+        <div className="flex items-center gap-1">
+          <h1>{userData?.data?.name}</h1>
+          <p>({userData?.data?.role})</p>
+        </div>
+        <p>{userData?.data?.email}</p>
         {/* <VersionSwitcher
           versions={data.versions}
           defaultVersion={data.versions[0]}

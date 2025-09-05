@@ -20,7 +20,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { useGetMeQuery, useUpdateUserMutation } from "@/redux/features/user/user.api"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useTheme } from "next-themes"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import z from "zod"
 
 const EditProfile = z.object({
@@ -32,6 +35,7 @@ const EditProfile = z.object({
 export function EditAdminProfileModal() {
     const { data, isLoading } = useGetMeQuery(undefined)
     const [updateUser] = useUpdateUserMutation()
+    const [open, setOpen] = useState(false)
     const userInfo = data?.data
     const form = useForm<z.infer<typeof EditProfile>>({
         resolver: zodResolver(EditProfile)
@@ -41,14 +45,19 @@ export function EditAdminProfileModal() {
         const updateData = { ...data }
         try {
             const res = await updateUser({ updateData, id: userInfo._id })
-            console.log(res);
+            if (res?.data.success) {
+                toast.success("Profile Updated")
+                setOpen(false)
+            }
         } catch (error) {
+            toast.error("Something Wrong")
+            setOpen(false)
             console.log(error);
         }
     }
     if (isLoading) return ""
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button variant="outline">Edit</Button>
             </DialogTrigger>

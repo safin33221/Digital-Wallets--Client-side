@@ -1,4 +1,6 @@
 import { EditAdminProfileModal } from "@/components/Modules/Admin/EditAdminProfileModal";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { useGetMeQuery } from "@/redux/features/user/user.api";
 import { User, CheckCircle, XCircle } from "lucide-react";
 export default function AdminProfile() {
@@ -13,10 +15,7 @@ export default function AdminProfile() {
                     <h1 className="text-4xl font-bold">My Profile</h1>
                     <p className="text-gray-500">Role: {data.role}</p>
                 </div>
-                <div className="flex gap-3">
-                    <EditAdminProfileModal />
 
-                </div>
             </header>
 
             {/* Main Grid Section */}
@@ -28,10 +27,17 @@ export default function AdminProfile() {
                         <h2 className="text-2xl font-semibold">Personal Information</h2>
                     </div>
 
-                    <div className="flex items-center justify-center">
-                        <img className="w-40 h-40 rounded-full " src="" alt="" />
+                    <div className=" hover:bg-none flex items-center justify-center mx-auto">
+                        <Avatar className="w-40  h-40   hover:bg-none ">
+                            <AvatarImage className=" hover:bg-none " src="./avatar.jpg" alt="Profile image" />
+                            <AvatarFallback className="text-3xl  hover:bg-none ">{user?.data?.name.split("")[0]}</AvatarFallback>
+                        </Avatar>
                     </div>
 
+                        <div className="flex items-end justify-end ">
+                            <EditAdminProfileModal />
+
+                        </div>
                     <div className="space-y-2 text-lg bg-card md:p-10 rounded-xl w-full md:flex gap-30 items-center ">
                         <div className="space-y-5">
                             <p className="text-4xl"><span className="font-medium ">Name:</span> {data.name}</p>
