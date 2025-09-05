@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
-    <section className="mt-20">
+    <section className="py-20 ">
       <div className="container text-center">
         <div className="mx-auto flex max-w-5xl flex-col gap-6">
           <h1 className="text-3xl font-extrabold lg:text-6xl">
-            Your Money. Your Control.
+            Your Digital Payment Partner – <span className="text-primary">Payzo</span>
           </h1>
           <p className="text-muted-foreground text-balance lg:text-lg">
             Manage, send, and spend securely — all in one smart digital wallet.

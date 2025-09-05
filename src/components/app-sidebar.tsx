@@ -45,17 +45,24 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarGroupContent>
               <SidebarMenu className="space-y-2">
                 {item.items.map((item) => (
-                  <SidebarMenuItem className="flex items-center gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-1 rounded-xl" key={item.title}>
-                    {item.icon && <item.icon className="w-6" />}
-                    <SidebarMenuButton className="text-lg hover:bg-primary/10  font-semibold" asChild >
-                      <Link to={item.url}>{item.title}</Link>
-                    </SidebarMenuButton>
+                  <SidebarMenuItem key={item.title}>
+                    <Link to={item.url}>
+                      <SidebarMenuButton className="flex items-center gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-3 rounded-xl"  >
+                        {item.icon && <item.icon className="w-6" />}
+                        {item.title}
+                      </SidebarMenuButton>
+                    </Link>
                   </SidebarMenuItem>
                 ))}
-
-                <SidebarMenuButton className="gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-2 rounded-xl" asChild >
-                  <Link to={`/`}> <Globe/> View Site</Link>
-                </SidebarMenuButton>
+                <div className="bg-primary/50 my-5 w-full h-[1px]"></div>
+                <SidebarMenuItem className=" text-center " key={item.title}>
+                  <Link to={'/'}>
+                    <SidebarMenuButton className="flex items-center text-center gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-3 rounded-xl"  >
+                      <Globe />
+                      View Site
+                    </SidebarMenuButton>
+                  </Link>
+                </SidebarMenuItem>
               </SidebarMenu>
 
             </SidebarGroupContent>
