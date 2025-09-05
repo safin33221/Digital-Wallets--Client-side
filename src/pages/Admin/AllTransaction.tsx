@@ -62,7 +62,7 @@ export default function AllTransaction() {
             </tr>
           </thead>
           <tbody>
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+           
             {data?.data?.map((txn: any) => (
               <tr
                 key={txn._id}
