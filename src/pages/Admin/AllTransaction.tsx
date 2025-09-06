@@ -5,9 +5,13 @@ import { useState } from "react";
 
 export default function AllTransaction() {
   const [search, setSearch] = useState("")
+  const [statusFilter, setStatusFilter] = useState("all")
+  const [typeFilter, setTypeFilter] = useState("all")
   const query = {
-    searchTerm: search
-  }
+    searchTerm: search || undefined,
+    status: statusFilter !== "all" ? statusFilter : undefined,
+    type: typeFilter !== "all" ? typeFilter : undefined,
+  };
   console.log(query);
   const { data, isLoading } = useGetAllTransactionQuery(query)
   if (isLoading) return
@@ -27,8 +31,8 @@ export default function AllTransaction() {
           />
 
           <select
-            // value={statusFilter}
-            // onChange={(e) => setStatusFilter(e.target.value)}
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
             className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
           >
             <option value="all">All Status</option>
@@ -38,8 +42,8 @@ export default function AllTransaction() {
           </select>
 
           <select
-            // value={typeFilter}
-            // onChange={(e) => setTypeFilter(e.target.value)}
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value)}
             className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
           >
             <option value="all">All Types</option>
