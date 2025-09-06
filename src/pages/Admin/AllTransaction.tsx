@@ -2,18 +2,31 @@
 import { Button } from "@/components/ui/button";
 import { useGetAllTransactionQuery } from "@/redux/features/Transaction/transaciton.api";
 import { useState } from "react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 export default function AllTransaction() {
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
+  const [currentPage, setCurrentPage] = useState<number>(1)
+
   const query = {
     searchTerm: search || undefined,
     status: statusFilter !== "all" ? statusFilter : undefined,
     type: typeFilter !== "all" ? typeFilter : undefined,
+    page: currentPage
   };
-  console.log(query);
   const { data, isLoading } = useGetAllTransactionQuery(query)
+  const totalPage: number = data?.data?.meta?.totalPage
+  console.log(query);
   if (isLoading) return
   return (
     <div className="p-6 space-y-6">
@@ -73,7 +86,7 @@ export default function AllTransaction() {
           </thead>
           <tbody>
 
-            {data?.data?.map((txn: any) => (
+            {data?.data?.data?.map((txn: any) => (
               <tr
                 key={txn._id}
                 className="border-b hover:bg-gray-50 dark:hover:bg-gray-700"
@@ -117,6 +130,28 @@ export default function AllTransaction() {
           <p className="text-center py-4 text-gray-500">No transactions found</p>
         )}
       </div>
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem className={currentPage === 1 ? "opacity-35 cursor-no-drop" : ""}>
+            <PaginationPrevious onClick={() => currentPage != 1 && setCurrentPage((prev) => prev - 1)} />
+          </PaginationItem>
+
+          {
+            Array.from({ length: totalPage }, (_, id) => id + 1).map((page) => (
+              <PaginationItem>
+                <PaginationLink isActive={currentPage === page}>{page}</PaginationLink>
+              </PaginationItem>
+            ))
+          }
+
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem className={currentPage === totalPage ? "opacity-35 cursor-no-drop" : ""}>
+            <PaginationNext onClick={() => currentPage != totalPage && setCurrentPage((prev) => prev + 1)} />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };
