@@ -1,3 +1,4 @@
+import { ViewUserDetailsModal } from "@/components/Modules/Admin/ViewUserDetailsModal";
 import { role } from "@/constants/Role";
 import { useGetAllUsersQuery } from "@/redux/features/user/user.api";
 import type { IUser } from "@/types/user.type";
@@ -70,9 +71,7 @@ export default function ManageUser() {
                     )}
                   </td>
                   <td className="p-3 flex gap-2">
-                    <button className="px-2 py-1 text-sm rounded bg-blue-500 text-white hover:bg-blue-600">
-                      View
-                    </button>
+                    <ViewUserDetailsModal user={user} />
                     <button className="px-2 py-1 text-sm rounded bg-yellow-500 text-white hover:bg-yellow-600">
                       Edit
                     </button>
