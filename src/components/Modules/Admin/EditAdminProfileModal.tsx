@@ -20,7 +20,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { useGetMeQuery, useUpdateUserMutation } from "@/redux/features/user/user.api"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useTheme } from "next-themes"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"

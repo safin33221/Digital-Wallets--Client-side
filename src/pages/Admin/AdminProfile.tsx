@@ -1,6 +1,5 @@
 import { EditAdminProfileModal } from "@/components/Modules/Admin/EditAdminProfileModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { useGetMeQuery } from "@/redux/features/user/user.api";
 import { User, CheckCircle, XCircle } from "lucide-react";
 export default function AdminProfile() {

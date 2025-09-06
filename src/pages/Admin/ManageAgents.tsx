@@ -4,7 +4,6 @@ import type { IUser } from "@/types/user.type";
 
 export default function ManageAgents() {
   const { data: users, isLoading } = useGetAllUsersQuery({ role: role.agent });
-  const length = users?.data?.length as number
   return (
     <div className="p-6 space-y-6">
       {/* Header Controls */}
@@ -15,7 +14,7 @@ export default function ManageAgents() {
       {/* User Table */}
       <div className="overflow-x-auto rounded-lg shadow">
         <table className="w-full border-collapse">
-          <thead className="bg-gray-100 dark:bg-gray-800">
+          <thead className="bg-primary/20">
             <tr>
               <th className="p-3 text-left">Name</th>
               <th className="p-3 text-left">Email</th>
@@ -41,7 +40,7 @@ export default function ManageAgents() {
               : users?.data?.map((user: IUser) => (
                 <tr
                   key={user._id}
-                  className="border-b hover:bg-gray-50 dark:hover:bg-gray-700"
+                  className="border-b  hover:bg-primary/10"
                 >
                   <td className="p-3">{user.name}</td>
                   <td className="p-3">{user.email}</td>

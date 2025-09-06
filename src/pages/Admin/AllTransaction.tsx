@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { useGetAllTransactionQuery } from "@/redux/features/Transaction/transaciton.api";
+import { useState } from "react";
 
 export default function AllTransaction() {
-
-  const { data, isLoading } = useGetAllTransactionQuery(undefined)
+  const [search, setSearch] = useState("")
+  const query = {
+    searchTerm: search
+  }
+  console.log(query);
+  const { data, isLoading } = useGetAllTransactionQuery(query)
   if (isLoading) return
   return (
     <div className="p-6 space-y-6">
@@ -16,8 +21,8 @@ export default function AllTransaction() {
           <input
             type="text"
             placeholder="🔍 Search by phone or type"
-            // value={search}
-            // onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
           />
 
@@ -54,6 +59,7 @@ export default function AllTransaction() {
             <tr>
               <th className="p-3 text-left">Txn ID</th>
               <th className="p-3 text-left">User Phone</th>
+              <th className="p-3 text-left">Reciver Phone</th>
               <th className="p-3 text-left">Type</th>
               <th className="p-3 text-left">Amount</th>
               <th className="p-3 text-left">Status</th>
@@ -62,14 +68,15 @@ export default function AllTransaction() {
             </tr>
           </thead>
           <tbody>
-           
+
             {data?.data?.map((txn: any) => (
               <tr
                 key={txn._id}
                 className="border-b hover:bg-gray-50 dark:hover:bg-gray-700"
               >
-                <td className="p-3 text-sm">{txn._id}</td>
+                <td className="p-3 text-sm">{txn.transactionId}</td>
                 <td className="p-3">{txn.userPhone}</td>
+                <td className="p-3">{txn.toUserPhone}</td>
                 <td className="p-3 capitalize">{txn.type}</td>
                 <td className="p-3 font-medium">${txn.amount}</td>
                 <td className="p-3">
