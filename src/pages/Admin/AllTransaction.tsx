@@ -27,7 +27,7 @@ export default function AllTransaction() {
   const { data, isLoading } = useGetAllTransactionQuery(query)
   const totalPage: number = data?.data?.meta?.totalPage
   console.log(query);
-  if (isLoading) return
+
   return (
     <div className="p-6 space-y-6">
       {/* Header Controls */}
@@ -85,44 +85,63 @@ export default function AllTransaction() {
             </tr>
           </thead>
           <tbody>
+            {
+              isLoading ? (
+                Array.from({ length: 10 }).map((_, i) => (
+                  <tr key={i} className="animate-pulse border-b">
+                    {Array.from({ length: 10 }).map((_, j) => (
+                      <td key={j} className="p-3">
+                        <div className="h-4 w-24 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <>
+                  {
+                    data?.data?.data?.map((txn: any) => (
+                      <tr
+                        key={txn._id}
+                        className="border-b hover:bg-gray-50 dark:hover:bg-gray-700"
+                      >
+                        <td className="p-3 text-sm">{txn.transactionId}</td>
+                        <td className="p-3">{txn.userPhone}</td>
+                        <td className="p-3">{txn.toUserPhone}</td>
+                        <td className="p-3 capitalize">{txn.type}</td>
+                        <td className="p-3 font-medium">${txn.amount}</td>
+                        <td className="p-3">
+                          {txn.status === "success" && (
+                            <span className="px-2 py-1 rounded bg-green-100 text-green-600">
+                              ✅ Success
+                            </span>
+                          )}
+                          {txn.status === "pending" && (
+                            <span className="px-2 py-1 rounded bg-yellow-100 text-yellow-600">
+                              ⏳ Pending
+                            </span>
+                          )}
+                          {txn.status === "failed" && (
+                            <span className="px-2 py-1 rounded bg-red-100 text-red-600">
+                              ❌ Failed
+                            </span>
+                          )}
+                        </td>
+                        <td className="p-3 text-sm text-gray-500">
+                          {txn.createdAt ? new Date(txn.createdAt).toLocaleString() : "—"}
+                        </td>
+                        <td className="p-3">
+                          <Button className="">
+                            View
+                          </Button>
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </>
+              )
+            }
 
-            {data?.data?.data?.map((txn: any) => (
-              <tr
-                key={txn._id}
-                className="border-b hover:bg-gray-50 dark:hover:bg-gray-700"
-              >
-                <td className="p-3 text-sm">{txn.transactionId}</td>
-                <td className="p-3">{txn.userPhone}</td>
-                <td className="p-3">{txn.toUserPhone}</td>
-                <td className="p-3 capitalize">{txn.type}</td>
-                <td className="p-3 font-medium">${txn.amount}</td>
-                <td className="p-3">
-                  {txn.status === "success" && (
-                    <span className="px-2 py-1 rounded bg-green-100 text-green-600">
-                      ✅ Success
-                    </span>
-                  )}
-                  {txn.status === "pending" && (
-                    <span className="px-2 py-1 rounded bg-yellow-100 text-yellow-600">
-                      ⏳ Pending
-                    </span>
-                  )}
-                  {txn.status === "failed" && (
-                    <span className="px-2 py-1 rounded bg-red-100 text-red-600">
-                      ❌ Failed
-                    </span>
-                  )}
-                </td>
-                <td className="p-3 text-sm text-gray-500">
-                  {txn.createdAt ? new Date(txn.createdAt).toLocaleString() : "—"}
-                </td>
-                <td className="p-3">
-                  <Button className="">
-                    View
-                  </Button>
-                </td>
-              </tr>
-            ))}
+
           </tbody>
         </table>
 
