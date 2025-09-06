@@ -14,7 +14,8 @@ const userApi = baseApi.injectEndpoints({
                 url: "/user",
                 method: "GET",
                 params: params
-            })
+            }),
+            providesTags: ["USER"]
         }),
         updateUser: builder.mutation({
             query: ({ updateData, id }) => ({

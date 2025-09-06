@@ -1,11 +1,30 @@
 import { ViewUserDetailsModal } from "@/components/Modules/Admin/ViewUserDetailsModal";
+import { Button } from "@/components/ui/button";
 import { role } from "@/constants/Role";
-import { useGetAllUsersQuery } from "@/redux/features/user/user.api";
+import { useGetAllUsersQuery, useUpdateUserMutation } from "@/redux/features/user/user.api";
 import type { IUser } from "@/types/user.type";
+import { toast } from "sonner";
 
 export default function ManageUser() {
   const { data: users, isLoading } = useGetAllUsersQuery({ role: role.user });
+  const [updateUser] = useUpdateUserMutation()
+  const handleUpdateUser = async (data: { id: string, status: string }) => {
+    try {
+      const updatedData = {
+        updateData: { status: data.status },
+        id: data.id
+      }
 
+      const res = await updateUser(updatedData)
+      console.log(res?.data?.success);
+      if (res?.data?.success) {
+        toast.success("Status Update Successful")
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Status Update fail")
+    }
+  }
   return (
     <div className="p-6 space-y-6">
       {/* Header Controls */}
@@ -72,12 +91,22 @@ export default function ManageUser() {
                   </td>
                   <td className="p-3 flex gap-2">
                     <ViewUserDetailsModal user={user} />
-                    <button className="px-2 py-1 text-sm rounded bg-yellow-500 text-white hover:bg-yellow-600">
-                      Edit
-                    </button>
-                    <button className="px-2 py-1 text-sm rounded bg-red-500 text-white hover:bg-red-600">
-                      Block
-                    </button>
+
+                    {
+                      user.status === "BLOCKED" ? (
+                        <Button
+                          onClick={() => handleUpdateUser({ id: user._id, status: "UNBLOCK" })}
+                          variant={`outline`} className="px-2 py-1 text-sm rounded">
+                          Un Blocked
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => handleUpdateUser({ id: user._id, status: "BLOCKED" })}
+                          className="px-2 py-1 min-w-24 text-sm rounded bg-red-500 text-white hover:bg-red-600">
+                          Block
+                        </Button>
+                      )
+                    }
                   </td>
                 </tr>
               ))}
