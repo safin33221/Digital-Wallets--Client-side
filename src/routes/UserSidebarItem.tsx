@@ -1,6 +1,5 @@
-import ManageAgents from "@/pages/Admin/ManageAgents";
-import ManageUser from "@/pages/Admin/ManageUser";
-import Overview from "@/pages/Admin/Overview";
+import SendMoney from "@/pages/User/SendMony";
+import UserOverview from "@/pages/User/UserOverview";
 import type { ISidebarItem } from "@/types/index.type";
 
 export const UserSidebar: ISidebarItem[] = [
@@ -10,17 +9,27 @@ export const UserSidebar: ISidebarItem[] = [
             {
                 title: "Overview",
                 url: "/user/overview",
-                component: Overview
+                component: UserOverview
             },
             {
-                title: "Manage User",
-                url: "/user/mange-user",
-                component: ManageUser
+                title: "Withdraw money",
+                url: "/user/withdraw-money",
+                component: UserOverview
             },
             {
-                title: "Manage Agents",
-                url: "/user/mange-agents",
-                component: ManageAgents
+                title: "Send money",
+                url: "/user/send-money",
+                component: SendMoney
+            },
+            {
+                title: "Transaction history ",
+                url: "/user/transaction-history",
+                component: UserOverview
+            },
+            {
+                title: "Profile  ",
+                url: "/user/profile",
+                component: UserOverview
             },
 
         ],

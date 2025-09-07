@@ -16,9 +16,18 @@ const transactionApi = baseApi.injectEndpoints({
 
             })
         }),
+        sendMoney: (builder.mutation)({
+            query: (data) => ({
+                url: "/transaction/send-money",
+                method: "POST",
+                data: data
+
+            })
+        }),
     })
 })
 export const {
     useGetAllTransactionQuery,
-    useGetMyTransactionQuery
+    useGetMyTransactionQuery,
+    useSendMoneyMutation
 } = transactionApi
