@@ -41,7 +41,7 @@ export default function ManageUser() {
               <th className="p-3 text-left">Email</th>
               <th className="p-3 text-left">Phone</th>
               <th className="p-3 text-left">Role</th>
-              <th className="p-3 text-left">Verified</th>
+
               <th className="p-3 text-left">Status</th>
               <th className="p-3 text-left">Actions</th>
             </tr>
@@ -67,17 +67,7 @@ export default function ManageUser() {
                   <td className="p-3">{user.email}</td>
                   <td className="p-3">{user.phoneNumber || "—"}</td>
                   <td className="p-3">{user.role}</td>
-                  <td className="p-3">
-                    {user.isVerified ? (
-                      <span className="text-green-600 font-medium">
-                        ✔ Verified
-                      </span>
-                    ) : (
-                      <span className="text-red-600 font-medium">
-                        ❌ Not Verified
-                      </span>
-                    )}
-                  </td>
+
                   <td className="p-3">
                     {user.status === "BLOCKED" ? (
                       <span className="px-2 py-1 rounded bg-red-100 text-red-600">

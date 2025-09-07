@@ -1,9 +1,32 @@
+import { ViewUserDetailsModal } from "@/components/Modules/Admin/ViewUserDetailsModal";
+import { Button } from "@/components/ui/button";
 import { role } from "@/constants/Role";
-import { useGetAllUsersQuery } from "@/redux/features/user/user.api";
+import { useGetAllUsersQuery, useUpdateUserMutation } from "@/redux/features/user/user.api";
 import type { IUser } from "@/types/user.type";
+import { toast } from "sonner";
 
 export default function ManageAgents() {
   const { data: users, isLoading } = useGetAllUsersQuery({ role: role.agent });
+
+  const [updateUser] = useUpdateUserMutation()
+
+  const handleUpdateUser = async (data: { id: string, approved: boolean }) => {
+    try {
+      const updatedData = {
+        updateData: { approved: data.approved },
+        id: data.id
+      }
+
+      const res = await updateUser(updatedData)
+      console.log(res);
+      if (res?.data?.success) {
+        toast.success("Status Update Successful")
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Status Update fail")
+    }
+  }
   return (
     <div className="p-6 space-y-6">
       {/* Header Controls */}
@@ -47,13 +70,13 @@ export default function ManageAgents() {
                   <td className="p-3">{user.phoneNumber || "—"}</td>
                   <td className="p-3">{user.role}</td>
                   <td className="p-3">
-                    {user.isVerified ? (
+                    {user.approved ? (
                       <span className="text-green-600 font-medium">
-                        ✔ Verified
+                        ✔ Approved
                       </span>
                     ) : (
                       <span className="text-red-600 font-medium">
-                        ❌ Not Verified
+                        ❌ Suspend
                       </span>
                     )}
                   </td>
@@ -69,15 +92,22 @@ export default function ManageAgents() {
                     )}
                   </td>
                   <td className="p-3 flex gap-2">
-                    <button className="px-2 py-1 text-sm rounded bg-blue-500 text-white hover:bg-blue-600">
-                      View
-                    </button>
-                    <button className="px-2 py-1 text-sm rounded bg-yellow-500 text-white hover:bg-yellow-600">
-                      Edit
-                    </button>
-                    <button className="px-2 py-1 text-sm rounded bg-red-500 text-white hover:bg-red-600">
-                      Block
-                    </button>
+                    <ViewUserDetailsModal user={user} />
+                    {
+                      user.approved ? (
+                        <Button
+                          onClick={() => handleUpdateUser({ id: user._id, approved: false })}
+                          variant={`outline`} className="px-2 py-1 text-sm rounded">
+                          Suspend
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => handleUpdateUser({ id: user._id, approved: true })}
+                          className="px-2 py-1 min-w-24 text-sm rounded bg-green-500 text-white hover:bg-green-600">
+                          Approved
+                        </Button>
+                      )
+                    }
                   </td>
                 </tr>
               ))}
