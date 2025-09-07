@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from "@/components/ui/button";
 import { useGetAllTransactionQuery } from "@/redux/features/Transaction/transaciton.api";
 import { useState } from "react";
 import {
@@ -11,6 +10,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { ViewTransactionDetails } from "@/components/Modules/Admin/ViewTransactionDetails";
 
 export default function AllTransaction() {
   const [search, setSearch] = useState("")
@@ -130,9 +130,7 @@ export default function AllTransaction() {
                           {txn.createdAt ? new Date(txn.createdAt).toLocaleString() : "—"}
                         </td>
                         <td className="p-3">
-                          <Button className="">
-                            View
-                          </Button>
+                          <ViewTransactionDetails txn={txn} />
                         </td>
                       </tr>
                     ))

@@ -1,10 +1,12 @@
 
 import OverviewSkeleton from "@/components/ui/Skeleton/OverviewSkeleton";
 import { useGetUserStatQuery } from "@/redux/features/stat/stat.api";
-import { Ban, ShieldCheck, UserCheck, UserCog, UserX } from "lucide-react";
+import { useGetAllTransactionQuery } from "@/redux/features/Transaction/transaciton.api";
+import { Ban, ShieldCheck, UserCheck, UserCog, UserX, Wallet } from "lucide-react";
 
 export default function Overview() {
     const { data, isLoading } = useGetUserStatQuery(undefined)
+    const { data: transactionData } = useGetAllTransactionQuery(undefined)
     const stats = data?.data
     console.log(stats);
     if (isLoading) return <OverviewSkeleton />
@@ -63,6 +65,13 @@ export default function Overview() {
                             <p className="text-gray-500">Normal Users</p>
                         </div>
                     </div >
+                    <div>
+                        <div className=" bg-secondary/40 p-6 rounded-xl shadow flex flex-col items-center">
+                            <Wallet className="size-8 text-primary mb-2" />
+                            <h3 className="text-xl font-bold">{transactionData?.data?.meta?.total}</h3>
+                            <p className="text-gray-500">Total Transaction</p>
+                        </div>
+                    </div>
                 </div >
             </section >
 
