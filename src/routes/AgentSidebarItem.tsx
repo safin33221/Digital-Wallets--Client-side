@@ -1,5 +1,6 @@
 import AddMoneyToUser from "@/pages/Agent/AddMoneyToUser";
 import AgentOverview from "@/pages/Agent/AgentOverview";
+import TransactionHistory from "@/pages/Agent/TransactionHistory";
 import type { ISidebarItem } from "@/types/index.type";
 
 export const agentSidebar: ISidebarItem[] = [
@@ -23,8 +24,8 @@ export const agentSidebar: ISidebarItem[] = [
             },
             {
                 title: "Transaction History",
-                url: "/agent/mange-agents",
-                component: AgentOverview
+                url: "/agent/transaction-history",
+                component: TransactionHistory
             },
             {
                 title: " Profile",

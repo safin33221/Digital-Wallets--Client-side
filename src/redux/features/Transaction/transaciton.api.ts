@@ -8,9 +8,17 @@ const transactionApi = baseApi.injectEndpoints({
                 method: "GET",
                 params: params
             })
-        })
+        }),
+        getMyTransaction: (builder.query)({
+            query: () => ({
+                url: "/transaction/my-transaction",
+                method: "GET",
+
+            })
+        }),
     })
 })
 export const {
-    useGetAllTransactionQuery
+    useGetAllTransactionQuery,
+    useGetMyTransactionQuery
 } = transactionApi
