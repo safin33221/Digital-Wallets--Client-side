@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -14,7 +15,7 @@ import {
 } from "@/components/ui/radio-group"
 
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import {
     Form,
     FormControl,
@@ -28,6 +29,7 @@ import { useForm } from "react-hook-form";
 import { z } from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegisterMutation } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
 
 
 const registerSchema = z.object({
@@ -35,7 +37,10 @@ const registerSchema = z.object({
         message: "Username must be at least 2 characters.",
     }),
     email: z.email(),
-    phoneNumber: z.string(),
+    phoneNumber: z.string()
+        .regex(/^(?:\+8801\d{9}|01\d{9})$/, {
+            message: "Phone number must be valid for Bangladesh. Format: +8801XXXXXXXXX or 01XXXXXXXXX",
+        }),
     password: z.string(),
     role: z.string()
 
@@ -44,17 +49,29 @@ const registerSchema = z.object({
 
 export default function RegisterForm() {
     const [createUser] = useRegisterMutation()
-
+    const navigate = useNavigate()
     const form = useForm<z.infer<typeof registerSchema>>({
         resolver: zodResolver(registerSchema)
     })
 
     const onSubmit = async (data: z.infer<typeof registerSchema>) => {
+        const toasterId = toast.loading("Registration....")
         try {
             const res = await createUser(data)
+            if (res?.data?.success) {
+                toast.success("Registration successful", { id: toasterId })
+                navigate("/login")
+            } else {
+                toast.error((res?.error as { data?: { message?: string } })?.data?.message || "Registration failed", { id: toasterId })
+
+            }
             console.log(res);
-        } catch (error) {
-            console.log(error);
+        } catch (error: any) {
+
+            const errMsg =
+                error?.data?.message || error?.message || "Something went wrong!";
+            toast.error(errMsg, { id: toasterId });
+            console.error("Registration Error:", error)
         }
     }
     return (
@@ -181,7 +198,7 @@ export default function RegisterForm() {
                                 )}
                             />
                             <Button type="submit" className="w-full">
-                                Login
+                                Registration
                             </Button>
 
                         </form>

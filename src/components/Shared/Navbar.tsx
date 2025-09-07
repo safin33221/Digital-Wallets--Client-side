@@ -97,7 +97,7 @@ export default function Navbar() {
                 {navigationLinks.map((link, index) => (
                   <NavigationMenuItem key={index}>
                     <Link to={link.href}>
-                      <NavigationMenuLink href={link.href} className="text-muted-foreground text-xl hover:text-primary py-1.5 font-medium">
+                      <NavigationMenuLink className="text-muted-foreground text-xl hover:text-primary py-1.5 font-medium">
                         {link.label}
                       </NavigationMenuLink>
                     </Link>
@@ -114,7 +114,7 @@ export default function Navbar() {
             {/* Info menu */}
 
 
-            <InfoMenu /> 
+            <InfoMenu />
 
 
             {/* Notification */}

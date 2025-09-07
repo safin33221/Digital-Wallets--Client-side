@@ -3,9 +3,9 @@ import image from '../../assets/images/6280661.jpg';
 export default function Login() {
     return (
         <div className='grid md:grid-cols-2 min-h-screen'>
-            <div className='md:block md:col-span-1 hidden  '>
+            <div className='md:block md:col-span-1 hidden h-full '>
 
-                <img src={image} alt="" className='' />
+                <img src={image} alt="" className='h-full' />
 
             </div>
 
