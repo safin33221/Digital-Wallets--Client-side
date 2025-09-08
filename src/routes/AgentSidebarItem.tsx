@@ -1,6 +1,6 @@
 import AddMoneyToUser from "@/pages/Agent/AddMoneyToUser";
 import AgentOverview from "@/pages/Agent/AgentOverview";
-import TransactionHistory from "@/pages/Agent/TransactionHistory";
+import TransactionHistory from "@/pages/Common/TransactionHistory";
 import type { ISidebarItem } from "@/types/index.type";
 
 export const agentSidebar: ISidebarItem[] = [
