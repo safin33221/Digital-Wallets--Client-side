@@ -1,6 +1,7 @@
 import TransactionHistory from "@/pages/Common/TransactionHistory";
 import SendMoney from "@/pages/User/SendMony";
 import UserOverview from "@/pages/User/UserOverview";
+import UserProfile from "@/pages/Common/UserProfile";
 import type { ISidebarItem } from "@/types/index.type";
 
 export const UserSidebar: ISidebarItem[] = [
@@ -30,7 +31,7 @@ export const UserSidebar: ISidebarItem[] = [
             {
                 title: "Profile  ",
                 url: "/user/profile",
-                component: UserOverview
+                component: UserProfile
             },
 
         ],
