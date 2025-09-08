@@ -1,7 +1,7 @@
 
 export default function AboutHero() {
     return (
-        <section className="bg-muted p-20">
+        <section className="bg-background px-20 mt-10">
             <div className="container mx-auto px-4 text-center">
                 <h1 className="text-4xl font-extrabold lg:text-6xl">
                     About Us

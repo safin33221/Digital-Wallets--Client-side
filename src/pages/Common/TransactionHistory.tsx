@@ -14,7 +14,7 @@ export default function TransactionHistory() {
       <div className="overflow-x-auto">
         <table className="w-full text-left border rounded-lg shadow-sm">
           <thead>
-            <tr className="bg-gray-50">
+            <tr className="">
               <th className="px-4 py-2">#</th>
               <th className="px-4 py-2">Transaction ID</th>
               <th className="px-4 py-2">To User Phone</th>
@@ -40,8 +40,8 @@ export default function TransactionHistory() {
               transactions.map((tx: any, index: number) => (
                 <tr
                   key={tx._id}
-                  className={`border-t hover:bg-primary/10 ${
-                    index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                  className={`border-t hover:bg-primary/10 text-lg ${
+                    index % 2 === 0 ? "" : ""
                   }`}
                 >
                   <td className="px-4 py-2">{index + 1}</td>

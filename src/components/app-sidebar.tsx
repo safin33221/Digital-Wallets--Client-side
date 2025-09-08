@@ -18,62 +18,76 @@ import { Link } from "react-router"
 import Logo from "./logo"
 import { Globe } from "lucide-react"
 
-// This is sample data.
-
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: userData } = useGetMeQuery(undefined)
-  const data = {
+  const { data: userData, isLoading } = useGetMeQuery(undefined)
 
-    navMain: getSidebarItem(userData?.data?.role)
+  const data = {
+    navMain: getSidebarItem(userData?.data?.role),
   }
+
   return (
     <Sidebar {...props}>
-      <SidebarHeader className="flex items-center border-b">
+      <SidebarHeader className="flex flex-col items-start gap-2 border-b p-4">
         <Logo />
-        <div className="flex items-center gap-1">
-          <h1>{userData?.data?.name}</h1>
-          <p>({userData?.data?.role})</p>
-        </div>
-        <p>{userData?.data?.email}</p>
-        {/* <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        /> */}
-        {/* <SearchForm /> */}
+        {isLoading ? (
+          <div className="w-full animate-pulse space-y-2">
+            <div className="h-4 w-24 bg-gray-200 rounded"></div>
+            <div className="h-3 w-16 bg-gray-200 rounded"></div>
+            <div className="h-3 w-40 bg-gray-200 rounded"></div>
+          </div>
+        ) : (
+          <div className="space-y-1">
+            <div className="flex items-center gap-1">
+              <h1 className="font-semibold">{userData?.data?.name}</h1>
+              <p className="text-sm text-gray-500">({userData?.data?.role})</p>
+            </div>
+            <p className="text-xs text-gray-400">{userData?.data?.email}</p>
+          </div>
+        )}
       </SidebarHeader>
-      <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu className="space-y-2">
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <Link to={item.url}>
-                      <SidebarMenuButton className="flex items-center gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-3 rounded-xl"  >
-                        {item.icon && <item.icon className="w-6" />}
-                        {item.title}
+
+      <SidebarContent className="p-2">
+        {isLoading ? (
+          <div className="animate-pulse space-y-4">
+            {Array.from({ length: 4 }).map((_, idx) => (
+              <div key={idx} className="h-10 bg-gray-200 rounded-lg"></div>
+            ))}
+            <div className="my-5 h-[1px] bg-gray-300"></div>
+            <div className="h-10 bg-gray-200 rounded-lg"></div>
+          </div>
+        ) : (
+          data.navMain.map((item) => (
+            <SidebarGroup key={item.title}>
+              <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu className="space-y-2">
+                  {item.items.map((child) => (
+                    <SidebarMenuItem key={child.title}>
+                      <Link to={child.url}>
+                        <SidebarMenuButton className="flex items-center gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-3 rounded-xl">
+                          {child.icon && <child.icon className="w-6" />}
+                          {child.title}
+                        </SidebarMenuButton>
+                      </Link>
+                    </SidebarMenuItem>
+                  ))}
+
+                  <div className="bg-primary/50 my-5 w-full h-[1px]"></div>
+                  <SidebarMenuItem className="text-center">
+                    <Link to={"/"}>
+                      <SidebarMenuButton className="flex items-center justify-center gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-3 rounded-xl">
+                        <Globe />
+                        View Site
                       </SidebarMenuButton>
                     </Link>
                   </SidebarMenuItem>
-                ))}
-                <div className="bg-primary/50 my-5 w-full h-[1px]"></div>
-                <SidebarMenuItem className=" text-center " key={item.title}>
-                  <Link to={'/'}>
-                    <SidebarMenuButton className="flex items-center text-center gap-2 text-lg hover:bg-primary/50 border border-primary/30 font-semibold p-3 rounded-xl"  >
-                      <Globe />
-                      View Site
-                    </SidebarMenuButton>
-                  </Link>
-                </SidebarMenuItem>
-              </SidebarMenu>
-
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ))
+        )}
       </SidebarContent>
+
       <SidebarRail />
     </Sidebar>
   )

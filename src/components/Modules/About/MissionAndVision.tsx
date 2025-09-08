@@ -7,7 +7,7 @@ export default function MissionVision() {
 
             <div className="mt-12 grid gap-12 sm:grid-cols-2">
                 {/* Mission */}
-                <div className="flex flex-col items-center text-center p-6 bg-white rounded-2xl shadow-md">
+                <div className="flex flex-col items-center text-center p-6 bg-card rounded-2xl shadow-md">
                     <ShieldCheck className="size-12 text-primary mb-4" />
                     <h3 className="text-xl font-semibold">Our Mission</h3>
                     <p className="mt-2 text-muted-foreground">
@@ -16,7 +16,7 @@ export default function MissionVision() {
                 </div>
 
                 {/* Vision */}
-                <div className="flex flex-col items-center text-center p-6 bg-white rounded-2xl shadow-md">
+                <div className="flex flex-col items-center text-center p-6 bg-card rounded-2xl shadow-md">
                     <Globe2 className="size-12 text-primary mb-4" />
                     <h3 className="text-xl font-semibold">Our Vision</h3>
                     <p className="mt-2 text-muted-foreground">
