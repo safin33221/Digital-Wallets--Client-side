@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -12,7 +13,7 @@ import { useGetMeQuery } from "@/redux/features/user/user.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import z from "zod";
+import * as z from "zod";
 
 // ✅ Schema
 const formSchema = z.object({
@@ -22,7 +23,7 @@ const formSchema = z.object({
             message:
                 "Phone number must be valid for Bangladesh. Format: +8801XXXXXXXXX or 01XXXXXXXXX",
         }),
-    amount: z.preprocess((val) => Number(val), z.number()),
+    amount: z.coerce.number(),
     password: z.string(),
 });
 
@@ -30,7 +31,7 @@ export default function SendMoney() {
     const [sendMoney] = useSendMoneyMutation();
     const { data } = useGetMeQuery(undefined)
     console.log(data?.data?.wallet?.balance);
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm({
         resolver: zodResolver(formSchema),
     });
 
@@ -50,7 +51,12 @@ export default function SendMoney() {
             if (res?.data?.success) {
                 toast.success("Money Transfer Successful", { id: toasterId })
             } else {
-                toast.error((res?.error?.data?.message), { id: toasterId })
+                toast.error(
+                    typeof res?.error === "object" && res?.error !== null && "data" in res.error && (res.error as any).data?.message
+                        ? (res.error as any).data.message
+                        : "Money Transfer Failed",
+                    { id: toasterId }
+                )
 
             }
         } catch (error) {
@@ -158,10 +164,10 @@ export default function SendMoney() {
                                         <FormLabel>Amount</FormLabel>
                                         <FormControl>
                                             <Input
-                                                type="number"
+
                                                 placeholder="Enter amount"
                                                 {...field}
-                                                value={field.value || ""}
+                                                value={field.value as number}
                                             />
                                         </FormControl>
                                         <FormMessage />

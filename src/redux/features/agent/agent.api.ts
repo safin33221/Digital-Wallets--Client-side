@@ -7,7 +7,8 @@ const agentApi = baseApi.injectEndpoints({
                 url: "/transaction/cash-in",
                 method: "POST",
                 data: data
-            })
+            }),
+            invalidatesTags: ["TRANSACTION"]
         })
     })
 })
