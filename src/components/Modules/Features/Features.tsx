@@ -1,5 +1,4 @@
-// components/Features.tsx
-import React from "react";
+
 import { Shield, Smartphone, Globe, Zap, CreditCard, Users } from "lucide-react";
 
 const features = [
