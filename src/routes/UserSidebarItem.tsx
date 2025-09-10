@@ -3,6 +3,7 @@ import SendMoney from "@/pages/User/SendMony";
 import UserOverview from "@/pages/User/UserOverview";
 import UserProfile from "@/pages/Common/UserProfile";
 import type { ISidebarItem } from "@/types/index.type";
+import CashOut from "@/pages/User/CashOut";
 
 export const UserSidebar: ISidebarItem[] = [
     {
@@ -14,9 +15,9 @@ export const UserSidebar: ISidebarItem[] = [
                 component: UserOverview
             },
             {
-                title: "Withdraw money",
+                title: "Cash Out",
                 url: "/user/withdraw-money",
-                component: UserOverview
+                component: CashOut
             },
             {
                 title: "Send money",

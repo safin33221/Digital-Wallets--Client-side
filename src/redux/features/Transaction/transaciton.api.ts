@@ -28,11 +28,22 @@ const transactionApi = baseApi.injectEndpoints({
             providesTags: ["TRANSACTION"]
 
         }),
+        cashOut: (builder.mutation)({
+            query: (data) => ({
+                url: "/transaction/withdraw-money",
+                method: "post",
+                data: data
+
+            }),
+            invalidatesTags: ["TRANSACTION"]
+
+        }),
 
     })
 })
 export const {
     useGetAllTransactionQuery,
     useGetMyTransactionQuery,
-    useSendMoneyMutation
+    useSendMoneyMutation,
+    useCashOutMutation
 } = transactionApi
