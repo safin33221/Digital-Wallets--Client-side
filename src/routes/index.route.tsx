@@ -15,11 +15,13 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebar } from "./AdminSidebar";
 import { agentSidebar } from "./AgentSidebarItem";
 import { UserSidebar } from "./UserSidebarItem";
+import GlobalError from "@/components/Shared/GlobalError";
 
 export const router = createBrowserRouter([
     {
         Component: App,
         path: "/",
+        errorElement: <GlobalError />,
         children: [
             {
                 Component: Home,

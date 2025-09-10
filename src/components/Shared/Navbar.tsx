@@ -1,6 +1,4 @@
-import InfoMenu from "@/components/info-menu"
 import Logo from "@/components/logo"
-import NotificationMenu from "@/components/notification-menu"
 import UserMenu from "@/components/user-menu"
 import { Button } from "@/components/ui/button"
 import {
