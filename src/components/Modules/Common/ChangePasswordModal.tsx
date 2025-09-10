@@ -86,9 +86,9 @@ export function ChangePasswordModal() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline">Change Password</Button>
+                <Button variant="outline" className="mx-5">Change Password</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md ">
                 <DialogHeader>
                     <DialogTitle>Change Your Password</DialogTitle>
                 </DialogHeader>

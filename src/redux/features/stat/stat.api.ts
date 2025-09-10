@@ -7,11 +7,19 @@ export const statApi = baseApi.injectEndpoints({
                 url: "/stats/user",
                 method: "GET"
             })
-        })
-    })
+        }),
+        getSingleUserStat: builder.query({
+            query: () => ({
+                url: "/stats/my-stat",
+                method: "GET"
+            })
+        }),
+    }),
 })
 
 export const {
 
-    useGetUserStatQuery
+
+    useGetUserStatQuery,
+    useGetSingleUserStatQuery
 } = statApi
