@@ -15,6 +15,15 @@ export const statApi = baseApi.injectEndpoints({
             }),
             providesTags: ["TRANSACTION"]
         }),
+        getSingleAgentTransStat: (builder.query)({
+            query: () => ({
+                url: "/stats/get-single-agent-transactionStat",
+                method: "GET",
+
+            }),
+            providesTags: ["TRANSACTION"]
+
+        }),
     }),
 })
 
@@ -22,5 +31,6 @@ export const {
 
 
     useGetUserStatQuery,
-    useGetSingleUserStatQuery
+    useGetSingleUserStatQuery,
+    useGetSingleAgentTransStatQuery
 } = statApi

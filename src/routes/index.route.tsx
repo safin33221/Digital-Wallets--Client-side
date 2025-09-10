@@ -48,6 +48,7 @@ export const router = createBrowserRouter([
 
     {
         Component: withAuth(DashboardLayout, role.admin as TRole),
+        errorElement: <GlobalError />,
         path: "/admin",
         children: [
             {
@@ -60,6 +61,7 @@ export const router = createBrowserRouter([
     {
         Component: withAuth(DashboardLayout, role.agent as TRole),
         path: "/agent",
+        errorElement: <GlobalError />,
         children: [
             {
                 index: true,
@@ -71,6 +73,7 @@ export const router = createBrowserRouter([
     {
         Component: withAuth(DashboardLayout, role.user as TRole),
         path: "/user",
+        errorElement: <GlobalError />,
         children: [
             {
                 index: true,
