@@ -1,4 +1,5 @@
 import { EditAdminProfileModal } from "@/components/Modules/Admin/EditAdminProfileModal";
+import { ChangePasswordModal } from "@/components/Modules/Common/ChangePasswordModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useGetMeQuery } from "@/redux/features/user/user.api";
 import { User, CheckCircle, XCircle, Wallet, CreditCard, Shield } from "lucide-react";
@@ -39,6 +40,7 @@ export default function UserProfile() {
           </div>
 
           <div className="flex items-end justify-end">
+            <ChangePasswordModal />
             <EditAdminProfileModal />
           </div>
 
@@ -111,11 +113,10 @@ export default function UserProfile() {
               <Shield className="w-8 h-8 text-primary mb-2" />
               <p className="text-sm text-muted-foreground">KYC Status</p>
               <p
-                className={`text-lg font-semibold ${
-                  wallet.kycStatus === "VERIFIED"
+                className={`text-lg font-semibold ${wallet.kycStatus === "VERIFIED"
                     ? "text-green-600"
                     : "text-red-600"
-                }`}
+                  }`}
               >
                 {wallet.kycStatus}
               </p>
@@ -125,9 +126,8 @@ export default function UserProfile() {
               <User className="w-8 h-8 text-primary mb-2" />
               <p className="text-sm text-muted-foreground">Frozen Status</p>
               <p
-                className={`text-lg font-semibold ${
-                  wallet.isFrozen ? "text-red-600" : "text-green-600"
-                }`}
+                className={`text-lg font-semibold ${wallet.isFrozen ? "text-red-600" : "text-green-600"
+                  }`}
               >
                 {wallet.isFrozen ? "Frozen" : "Active"}
               </p>
