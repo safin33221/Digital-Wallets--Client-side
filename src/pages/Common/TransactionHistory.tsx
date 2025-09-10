@@ -46,7 +46,7 @@ export default function TransactionHistory() {
                 >
                   <td className="px-4 py-2">{index + 1}</td>
                   <td className="px-4 py-2 font-mono text-xs">{tx.transactionId}</td>
-                  <td className="px-4 py-2">{tx.userPhone}</td>
+                  <td className="px-4 py-2">{tx.toUserPhone}</td>
                   <td className="px-4 py-2">{tx.type}</td>
                   <td className="px-4 py-2">
                     {tx.amount ? `${tx.amount.toLocaleString()} BTD` : "-"}

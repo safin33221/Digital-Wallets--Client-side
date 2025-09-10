@@ -1,7 +1,5 @@
 import {
-  BoltIcon, LogOutIcon,
-  PinIcon,
-  UserPenIcon
+  BoltIcon, LogOutIcon
 } from "lucide-react"
 
 import {
@@ -95,7 +93,7 @@ export default function UserMenu() {
 
 
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <PinIcon size={16} className="opacity-60" aria-hidden="true" />
@@ -106,7 +104,7 @@ export default function UserMenu() {
             <span>Option 5</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator /> */}
         <DropdownMenuItem onClick={handleLogout}>
           <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
 

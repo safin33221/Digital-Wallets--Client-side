@@ -8,7 +8,7 @@ import {
     FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useCashOutMutation, useSendMoneyMutation } from "@/redux/features/Transaction/transaciton.api";
+import { useCashOutMutation } from "@/redux/features/Transaction/transaciton.api";
 import { useGetMeQuery } from "@/redux/features/user/user.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

@@ -114,11 +114,11 @@ export default function Navbar() {
             {/* Info menu */}
 
 
-            <InfoMenu />
+            {/* <InfoMenu /> */}
 
 
             {/* Notification */}
-            <NotificationMenu />
+            {/* <NotificationMenu /> */}
           </div>
           {/* User menu */}
 

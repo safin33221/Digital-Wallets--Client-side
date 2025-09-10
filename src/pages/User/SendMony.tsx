@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSendMoneyMutation } from "@/redux/features/Transaction/transaciton.api";
-import { useGetMeQuery } from "@/redux/features/user/user.api";
+import { useGetAllUsersQuery, useGetMeQuery } from "@/redux/features/user/user.api";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -28,9 +29,18 @@ const formSchema = z.object({
 });
 
 export default function SendMoney() {
+    const [search, setSearch] = useState("")
     const [sendMoney] = useSendMoneyMutation();
     const { data } = useGetMeQuery(undefined)
-    console.log(data?.data?.wallet?.balance);
+    const query = {
+        searchTerm: search || undefined,
+        role: "USER"
+    };
+
+    const { data: usersData } = useGetAllUsersQuery(query);
+    const users = usersData?.data?.data
+
+
     const form = useForm({
         resolver: zodResolver(formSchema),
     });
@@ -144,16 +154,42 @@ export default function SendMoney() {
                                     <FormItem>
                                         <FormLabel>To User Account Number</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                placeholder="Enter account number"
-                                                {...field}
-                                                value={field.value || ""}
-                                            />
+                                            <div className="relative">
+                                                <Input
+                                                    placeholder="Enter account number"
+                                                    {...field}
+                                                    value={field.value || ""}
+                                                    onChange={(e) => {
+                                                        field.onChange(e);      // update form state
+                                                        setSearch(e.target.value); // update search query
+                                                    }}
+                                                />
+
+                                                {/* Suggestions Dropdown */}
+                                                {search && users?.length > 0 && (
+                                                    <div className="absolute z-10 mt-1 w-full bg-white border rounded-md shadow-md max-h-48 overflow-y-auto">
+                                                        {users.map((user: any) => (
+                                                            <div
+                                                                key={user._id}
+                                                                onClick={() => {
+                                                                    form.setValue("toUserPhone", user.phoneNumber);
+                                                                    setSearch(""); 
+                                                                }}
+                                                                className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                                            >
+                                                                <p className="font-medium">{user.name}</p>
+                                                                <p className="text-sm text-gray-500">{user.phoneNumber}</p>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
+
 
                             {/* Amount */}
                             <FormField
