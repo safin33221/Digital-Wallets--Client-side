@@ -1,3 +1,4 @@
+import AddBalance from "@/pages/Agent/AddBalance";
 import AddMoneyToUser from "@/pages/Agent/AddMoneyToUser";
 import AgentOverview from "@/pages/Agent/AgentOverview";
 import TransactionHistory from "@/pages/Common/TransactionHistory";
@@ -14,7 +15,7 @@ export const agentSidebar: ISidebarItem[] = [
                 component: AgentOverview
             },
             {
-                title: "Add Money",
+                title: "Send Money",
                 url: "/agent/add-money-to-user",
                 component: AddMoneyToUser
             },
@@ -22,6 +23,11 @@ export const agentSidebar: ISidebarItem[] = [
                 title: "Withdraw Money",
                 url: "/agent/mange-agents",
                 component: AgentOverview
+            },
+            {
+                title: "Add Balance",
+                url: "/agent/add-balance",
+                component: AddBalance
             },
             {
                 title: "Transaction History",

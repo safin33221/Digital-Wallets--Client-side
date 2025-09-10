@@ -9,11 +9,21 @@ const agentApi = baseApi.injectEndpoints({
                 data: data
             }),
             invalidatesTags: ["TRANSACTION"]
-        })
+        }),
+        addMoneyToMyAccount: builder.mutation({
+            query: (data) => ({
+                url: "/transaction/add-money",
+                method: "POST",
+                data: data
+            }),
+            invalidatesTags: ["TRANSACTION", "USER"]
+        }),
+
     })
 })
 
 
 export const {
-    useAddMoneyToUserMutation
+    useAddMoneyToUserMutation,
+    useAddMoneyToMyAccountMutation
 } = agentApi
