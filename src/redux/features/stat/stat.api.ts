@@ -12,7 +12,8 @@ export const statApi = baseApi.injectEndpoints({
             query: () => ({
                 url: "/stats/my-stat",
                 method: "GET"
-            })
+            }),
+            providesTags: ["TRANSACTION"]
         }),
     }),
 })

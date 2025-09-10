@@ -19,11 +19,7 @@ export const agentSidebar: ISidebarItem[] = [
                 url: "/agent/add-money-to-user",
                 component: AddMoneyToUser
             },
-            {
-                title: "Withdraw Money",
-                url: "/agent/mange-agents",
-                component: AgentOverview
-            },
+      
             {
                 title: "Add Balance",
                 url: "/agent/add-balance",

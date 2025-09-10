@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetSingleUserStatQuery } from "@/redux/features/stat/stat.api";
 
 export default function UserOverview() {

@@ -7,7 +7,7 @@ const userApi = baseApi.injectEndpoints({
                 url: "/user/me",
                 method: "GET"
             }),
-            providesTags: ["USER"]
+            providesTags: ["USER", "TRANSACTION"]
         }),
         getAllUsers: builder.query({
             query: (params) => ({

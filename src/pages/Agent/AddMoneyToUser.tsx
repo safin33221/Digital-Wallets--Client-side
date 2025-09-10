@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -46,12 +47,11 @@ export default function AddMoneyComponent() {
         try {
             const res = await addMoney(data);
 
-
-            if (res?.data?.success) {
+            // Use type assertion or optional chaining to avoid error
+            if ((res as any)?.data?.success) {
                 toast.success("Money Transfer Successful", { id: toasterId })
             } else {
-                toast.error((res?.error?.data?.message), { id: toasterId })
-
+                toast.error((res as any)?.error?.data?.message || "Transfer failed", { id: toasterId })
             }
         } catch (error) {
             console.log(error);
@@ -122,7 +122,7 @@ export default function AddMoneyComponent() {
                                 </div>
                                 <div>
                                     <h2 className="text-lg font-semibold">
-                                        Add Money — Quick Transfer
+                                        Send Money  — Quick Transfer
                                     </h2>
                                     <p className="text-sm text-slate-500">
                                         Provide receiver account, amount, and your password.

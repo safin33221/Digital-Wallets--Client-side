@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -52,7 +53,7 @@ export default function AddBalance() {
             if (res?.data?.success) {
                 toast.success("Money Transfer Successful", { id: toasterId });
             } else {
-                toast.error(res?.error?.data?.message, { id: toasterId });
+                toast.error((res as any)?.error?.data?.message || "Transfer failed", { id: toasterId })
             }
         } catch (error) {
             console.log(error);
