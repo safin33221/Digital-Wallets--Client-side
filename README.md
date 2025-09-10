@@ -1,69 +1,119 @@
-# React + TypeScript + Vite
+# Payzo – Digital Wallet Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Demo](https://digital-wallet-frontend-jkikd6302.vercel.app/)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Overview
 
-## Expanding the ESLint configuration
+**Payzo** is a secure, role-based, and user-friendly frontend application for a Digital Wallet System, inspired by services like **bKash** and **Nagad**. Built using **React.js**, **Redux Toolkit**, and **RTK Query**, the application enables Users, Agents, and Admins to perform financial operations and manage wallets seamlessly.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Key features include:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Public landing pages showcasing the wallet service  
+- Role-based dashboards with tailored features for Users, Agents, and Admins  
+- Robust state management and API integration using Redux Toolkit & RTK Query  
+- Responsive UI and polished UX for all devices  
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Test Credentials
+
+| Role   | Description                         | Email                 | Password       |
+|--------|-------------------------------------|----------------------|----------------|
+| Admin  | Full system access and management    | admin@example.com     | adminpassword  |
+| Agent  | Handle user wallet transactions      | agent@example.com     | agentpassword  |
+| User   | Standard wallet operations           | user@example.com      | userpassword   |
+
+---
+
+## Technology Stack
+
+**Frontend:**
+
+- React.js with TypeScript  
+- Redux Toolkit & RTK Query  
+- React Router DOM  
+- Tailwind CSS for styling  
+- Toast notifications & guided tour libraries  
+
+**Backend (API, provided separately or mocked):**
+
+- Node.js / Express.js (REST API)  
+- MongoDB / Mongoose  
+- JWT & bcrypt for secure authentication  
+
+---
+
+
+## User Experience // Functional Features
+
+Here’s how a **user** would experience the Payzo application:
+
+1. **Landing Page:**  
+   - Visitors see a **modern landing page** with hero banner, navigation menu, and smooth animations.  
+   - Can explore **About**, **Features**, **Pricing**, **Contact**, and **FAQ** pages without logging in.  
+
+2. **Registration & Login:**  
+   - New users can **register** selecting their role (User or Agent).  
+   - Returning users can **log in** with JWT authentication.  
+   - Role-based dashboard redirection ensures the correct view.  
+
+3. **User Dashboard:**  
+   - View **wallet balance** and recent transactions.  
+   - **Deposit or withdraw money** (simulated via agent).  
+   - **Send money** to other users by phone/email.  
+   - **Transaction history** with filtering and pagination.  
+   - Manage **profile details** like name, phone, and password.  
+
+4. **Agent Dashboard:**  
+   - View **cash-in/out summary** and recent activities.  
+   - Add or withdraw money to/from user wallets.  
+   - Track all handled transactions and optionally view commissions.  
+   - Update personal profile information.  
+
+5. **Admin Dashboard:**  
+   - Overview of total users, agents, transactions, and transaction volume.  
+   - Manage users and agents: approve, suspend, block/unblock.  
+   - Advanced transaction filters and search capabilities.  
+   - Adjust system fees or limits (optional).  
+
+6. **Guided Tour:**  
+   - New users experience a **5+ step guided tour** highlighting navigation, stats cards, charts, table filters, and theme toggle.  
+   - Tour runs only once and can be restarted from settings.  
+
+7. **General UI/UX:**  
+   - Role-based navigation menus  
+   - Loading indicators and toast notifications for feedback  
+   - Responsive design with accessible light/dark themes  
+
+---
+
+
+
+
+
+---
+
+## Setup Instructions
+
+1. **Clone the repository**  
+
+```bash
+git clone https://github.com/safin33221/Digital-Wallets--Client-side.git
+cd Digital-Wallets--Client-side
+bun i
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Configure Env file**  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+VITE_API_BASE_URL=https://your-backend-api.com
+```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. **Run Application**  
+
+```bash
+bun run dev
 ```
