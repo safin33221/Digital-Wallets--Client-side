@@ -1,6 +1,6 @@
 # Payzo – Digital Wallet Frontend
 
-[Live Demo](https://digital-wallet-frontend-jkikd6302.vercel.app/)
+visit - [Payzo](https://digital-wallet-frontend-jkikd6302.vercel.app/)
 
 ---
 
@@ -19,11 +19,11 @@ Key features include:
 
 ## Test Credentials
 
-| Role   | Description                         | Email                 | Password       |
-|--------|-------------------------------------|----------------------|----------------|
-| Admin  | Full system access and management    | admin@example.com     | adminpassword  |
-| Agent  | Handle user wallet transactions      | agent@example.com     | agentpassword  |
-| User   | Standard wallet operations           | user@example.com      | userpassword   |
+| Role   | Description                          | Email           | Password       |
+|--------|--------------------------------------|-----------------|----------------|
+| Admin  | Full system access and management    | 01837429636     | 01837429636    |
+| Agent  | Handle user wallet transactions      | 01837429696     | 01837429696    |
+| User   | Standard wallet operations           | 01878856422     | 01878856422    |
 
 ---
 
