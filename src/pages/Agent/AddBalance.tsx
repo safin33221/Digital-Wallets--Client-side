@@ -23,6 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
+import AddMoneySkeleton from "@/components/ui/Skeleton/AddMoneySkeleton";
 
 // ✅ Schema
 const formSchema = z.object({
@@ -34,7 +35,7 @@ const formSchema = z.object({
 
 export default function AddBalance() {
     const [addMoney] = useAddMoneyToMyAccountMutation();
-    const { data } = useGetMeQuery(undefined);
+    const { data, isLoading } = useGetMeQuery(undefined);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -60,7 +61,7 @@ export default function AddBalance() {
             toast.error("Something went wrong", { id: toasterId });
         }
     };
-
+    if (isLoading) return <AddMoneySkeleton />
     return (
         <div className="flex items-center justify-center p-6">
             <div className="md:grid grid-cols-12 w-full gap-10 space-y-6">
@@ -76,7 +77,7 @@ export default function AddBalance() {
                         <form
                             id="addBalance"
                             onSubmit={form.handleSubmit(onSubmit)}
-                            className="w-full backdrop-blur-md rounded-2xl shadow-2xl p-6 border"
+                            className="w-full backdrop-blur-md rounded-2xl shadow-2xl p-6 border space-y-5"
                         >
                             {/* Header */}
                             <div className="flex items-center gap-3 mb-6">

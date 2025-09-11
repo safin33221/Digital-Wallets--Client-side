@@ -2,8 +2,20 @@ import { Star } from "lucide-react";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
+import { useGetMeQuery } from "@/redux/features/user/user.api";
+import { role } from "@/constants/Role";
 
 const Hero = () => {
+  const { data, isLoading } = useGetMeQuery(undefined)
+  const getStated = [
+    { href: "/admin", label: "Get Started", role: role.admin },
+    { href: "/agent", label: "Get Started", role: role.agent },
+    { href: "/user", label: "Get Started", role: role.user },
+
+  ]
+
+
   return (
     <section className="py-20 ">
       <div className="container text-center">
@@ -16,8 +28,29 @@ const Hero = () => {
           </p>
         </div>
         <div className="mt-10 flex justify-center gap-4">
-          <Button size="lg" asChild>
-            <a href="#get-started">Get Started</a>
+          <Button id="get-started" size="lg" >
+
+            {
+              data?.data?.role ? (
+                !isLoading && getStated?.map((link) => (
+                  <>
+                    {
+                      link?.role === data?.data?.role && (
+
+
+                        <Link to={link.href}>{link.label}</Link>
+
+                      )
+                    }
+                  </>
+                ))) : (
+
+                <>
+                  <Link to={`/login`}>Get Started</Link>
+                </>
+              )
+            }
+
           </Button>
           <Button size="lg" variant="outline" asChild>
             <a href="#download">Download App</a>

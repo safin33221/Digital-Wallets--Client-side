@@ -3,10 +3,8 @@ import {
     Card,
     CardAction,
     CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
+    CardDescription, CardHeader,
+    CardTitle
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
@@ -23,6 +21,7 @@ import {
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
 
 const loginSchema = z.object({
     phoneNumber: z.string(),
@@ -37,12 +36,13 @@ export default function LoginForm() {
     const onSubmit = async (data: z.infer<typeof loginSchema>) => {
         try {
             const res = await login(data)
-            console.log(res);
             if (res.data.success) {
                 navigate('/')
+                toast.success("Login Successful")
             }
         } catch (error) {
             console.log(error);
+            toast.error("Login Successful")
         }
 
     }
@@ -52,7 +52,7 @@ export default function LoginForm() {
                 <CardHeader>
 
                     <Link to={`/`}>
-                        <Button className='w-fit py-4'>
+                        <Button id="back-to-home" className='w-fit py-4'>
                             Back To Home
                         </Button>
                     </Link>
@@ -60,7 +60,7 @@ export default function LoginForm() {
                     <CardDescription className="sr-only ">
                         Enter your email below to login to your account
                     </CardDescription>
-                    <CardAction>
+                    <CardAction id="register-new-account">
                         <Link to={"/register"}> <Button variant="link">Sign Up</Button></Link>
                     </CardAction>
                 </CardHeader>
@@ -111,12 +111,7 @@ export default function LoginForm() {
                         </form>
                     </Form>
                 </CardContent>
-                <CardFooter className="flex-col gap-2">
 
-                    <Button variant="outline" className="w-full">
-                        Login with Google
-                    </Button>
-                </CardFooter>
             </Card>
         </div>
     );

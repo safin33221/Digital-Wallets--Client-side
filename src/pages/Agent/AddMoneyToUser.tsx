@@ -8,6 +8,7 @@ import {
     FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import AddMoneySkeleton from "@/components/ui/Skeleton/AddMoneySkeleton";
 import { useAddMoneyToUserMutation } from "@/redux/features/agent/agent.api";
 import { useGetMeQuery } from "@/redux/features/user/user.api";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,7 +30,7 @@ const formSchema = z.object({
 
 export default function AddMoneyComponent() {
     const [addMoney] = useAddMoneyToUserMutation();
-    const { data } = useGetMeQuery(undefined)
+    const { data, isLoading } = useGetMeQuery(undefined)
     console.log(data?.data?.wallet?.balance);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -41,6 +42,8 @@ export default function AddMoneyComponent() {
         balance: data?.data?.wallet?.balance,
 
     };
+
+
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         const toasterId = toast.loading("Sending....")
@@ -58,6 +61,8 @@ export default function AddMoneyComponent() {
             toast.error("Something Wrong", { id: toasterId })
         }
     };
+
+    if (isLoading) return <AddMoneySkeleton />
 
     return (
         <div className="flex items-center justify-center p-6 ">

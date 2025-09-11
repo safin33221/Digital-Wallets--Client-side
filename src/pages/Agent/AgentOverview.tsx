@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import AgentOverviewSkeleton from "@/components/ui/Skeleton/AgentOverviewSkeleton";
 import { useGetSingleAgentTransStatQuery } from "@/redux/features/stat/stat.api";
 
 export default function AgentOverview() {
@@ -6,7 +7,7 @@ export default function AgentOverview() {
     const statsByType = data?.data?.statsByType || [];
     const recentTrans = data?.data?.recentTransactions || [];
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return <AgentOverviewSkeleton />;
     if (isError) return <p>Error fetching data</p>;
 
     return (

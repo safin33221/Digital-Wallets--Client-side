@@ -2,7 +2,7 @@ import RegisterForm from '@/components/Modules/Auth/RegisterForm';
 import image from '../../assets/images/7194068.jpg';
 export default function Register() {
     return (
-        <div className='grid grid-cols-2 min-h-screen'>
+        <div className='grid grid-cols-2 min-h-screen max-md:px-5 mx-auto'>
             <div className='  m-auto col-span-2 md:col-span-1 w-full  '>
                 <RegisterForm />
             </div>
