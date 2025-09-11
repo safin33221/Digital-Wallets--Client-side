@@ -2,8 +2,16 @@ import TransactionHistory from "@/pages/Common/TransactionHistory";
 import SendMoney from "@/pages/User/SendMony";
 import UserOverview from "@/pages/User/UserOverview";
 import UserProfile from "@/pages/Common/UserProfile";
-import type { ISidebarItem } from "@/types/index.type";
 import CashOut from "@/pages/User/CashOut";
+import type { ISidebarItem } from "@/types/index.type";
+
+import {
+    LayoutDashboard,
+    Wallet,
+    Send,
+    History,
+    User,
+} from "lucide-react";
 
 export const UserSidebar: ISidebarItem[] = [
     {
@@ -12,30 +20,33 @@ export const UserSidebar: ISidebarItem[] = [
             {
                 title: "Overview",
                 url: "/user/overview",
-                component: UserOverview
+                component: UserOverview,
+                icon: LayoutDashboard,
             },
             {
                 title: "Cash Out",
                 url: "/user/withdraw-money",
-                component: CashOut
+                component: CashOut,
+                icon: Wallet,
             },
             {
-                title: "Send money",
+                title: "Send Money",
                 url: "/user/send-money",
-                component: SendMoney
+                component: SendMoney,
+                icon: Send,
             },
             {
-                title: "Transaction history ",
+                title: "Transaction History",
                 url: "/user/transaction-history",
-                component: TransactionHistory
+                component: TransactionHistory,
+                icon: History,
             },
             {
-                title: "Profile  ",
+                title: "Profile",
                 url: "/user/profile",
-                component: UserProfile
+                component: UserProfile,
+                icon: User,
             },
-
         ],
     },
-
-]
+];

@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import UserOverviewSkeleton from "@/components/ui/Skeleton/UserOverviewSkeleton";
 import { useGetSingleUserStatQuery } from "@/redux/features/stat/stat.api";
 
 export default function UserOverview() {
   const { data, isLoading, error } = useGetSingleUserStatQuery(undefined);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <UserOverviewSkeleton />
   if (error) return <p>Something went wrong</p>;
 
   const walletBalance = data?.data?.walletBalance?.balance ?? 0;
@@ -41,7 +42,7 @@ export default function UserOverview() {
         {recentTransactions.length > 0 ? (
           <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="">
                 <th className="border px-3 py-2 text-left">Transaction ID</th>
                 <th className="border px-3 py-2">Phone</th>
                 <th className="border px-3 py-2">Amount</th>
@@ -58,10 +59,10 @@ export default function UserOverview() {
                   <td className="border px-3 py-2">
                     <span
                       className={`px-2 py-1 rounded text-white ${tx.status === "success"
-                          ? "bg-green-500"
-                          : tx.status === "pending"
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
+                        ? "bg-green-500"
+                        : tx.status === "pending"
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
                         }`}
                     >
                       {tx.status}

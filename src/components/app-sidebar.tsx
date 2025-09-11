@@ -31,9 +31,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <Logo />
         {isLoading ? (
           <div className="w-full animate-pulse space-y-2">
-            <div className="h-4 w-24 bg-gray-200 rounded"></div>
-            <div className="h-3 w-16 bg-gray-200 rounded"></div>
-            <div className="h-3 w-40 bg-gray-200 rounded"></div>
+            <div className="h-4 w-24 bg-background rounded"></div>
+            <div className="h-3 w-16 bg-background rounded"></div>
+            <div className="h-3 w-40 bg-background rounded"></div>
           </div>
         ) : (
           <div className="space-y-1">
@@ -50,10 +50,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {isLoading ? (
           <div className="animate-pulse space-y-4">
             {Array.from({ length: 4 }).map((_, idx) => (
-              <div key={idx} className="h-10 bg-gray-200 rounded-lg"></div>
+              <div key={idx} className="h-10 bg-background rounded-lg"></div>
             ))}
             <div className="my-5 h-[1px] bg-gray-300"></div>
-            <div className="h-10 bg-gray-200 rounded-lg"></div>
+            <div className="h-10 bg-background rounded-lg"></div>
           </div>
         ) : (
           data.navMain.map((item) => (

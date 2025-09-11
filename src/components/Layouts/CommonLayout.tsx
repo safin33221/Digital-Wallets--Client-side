@@ -77,9 +77,9 @@ export default function CommonLayout({ children }: { children: ReactNode }) {
             {/* Restart option (you can move this to Settings page instead) */}
             <button
                 onClick={restartTour}
-                className="fixed bottom-4 right-4 bg-blue-600 text-white px-3 py-2 rounded"
+                className="fixed bottom-4 right-4 bg-primary text-white px-3 py-2 rounded"
             >
-                Restart Tour
+                Start Guide
             </button>
         </div>
     );
