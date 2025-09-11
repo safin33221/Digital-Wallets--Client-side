@@ -1,4 +1,5 @@
 import { EditAdminProfileModal } from "@/components/Modules/Admin/EditAdminProfileModal";
+import { ChangePasswordModal } from "@/components/Modules/Common/ChangePasswordModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useGetMeQuery } from "@/redux/features/user/user.api";
 import { User, CheckCircle, XCircle } from "lucide-react";
@@ -33,10 +34,11 @@ export default function AdminProfile() {
                         </Avatar>
                     </div>
 
-                        <div className="flex items-end justify-end ">
-                            <EditAdminProfileModal />
+                    <div className="flex items-end justify-end ">
+                        <ChangePasswordModal />
+                        <EditAdminProfileModal />
 
-                        </div>
+                    </div>
                     <div className="space-y-2 text-lg bg-card md:p-10 rounded-xl w-full md:flex gap-30 items-center ">
                         <div className="space-y-5">
                             <p className="text-4xl"><span className="font-medium ">Name:</span> {data.name}</p>
